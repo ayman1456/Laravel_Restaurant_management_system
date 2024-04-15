@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model
 {
     use HasFactory;
+
+
+    function categories() {
+        return $this->belongsToMany(Category::class);
+    }
+
+
 }

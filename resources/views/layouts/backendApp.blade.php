@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/materialdesignicons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/fullcalendar.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/main.css') }}" />
+    @stack('customCss')
   </head>
   <body>
 
@@ -57,6 +58,39 @@
               <span class="me-2">  <i class="lni lni-pie-chart"></i></span>
               
               <span class="text">Food</span>
+            </a>
+            
+          </li>
+          <li class="nav-item {{ request()->routeIs('food') ? 'active' : null }}">
+            <a
+              href="{{ route('food.show') }}"
+            >
+              
+              <span class="me-2">  <i class="lni lni-pie-chart"></i></span>
+              
+              <span class="text">Employee Management</span>
+            </a>
+            
+          </li>
+          <li class="nav-item {{ request()->routeIs('food') ? 'active' : null }}">
+            <a
+              href="{{ route('food.show') }}"
+            >
+              
+              <span class="me-2">  <i class="lni lni-pie-chart"></i></span>
+              
+              <span class="text">Pos System</span>
+            </a>
+            
+          </li>
+          <li class="nav-item {{ request()->routeIs('food') ? 'active' : null }}">
+            <a
+              href="{{ route('food.show') }}"
+            >
+              
+              <span class="me-2">  <i class="lni lni-pie-chart"></i></span>
+              
+              <span class="text">Kitchen Orders</span>
             </a>
             
           </li>
@@ -232,6 +266,9 @@
     <script src="{{ asset('backend/assets/js/world-merc.js') }} "></script>
     <script src="{{ asset('backend/assets/js/polyfill.js') }} "></script>
     <script src="{{ asset('backend/assets/js/main.js') }} "></script>
+
+    @stack('customJs')
+
   </body>
 </html>
 
