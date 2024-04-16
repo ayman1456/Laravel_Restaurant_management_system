@@ -100,7 +100,6 @@
               <th width="80px">Image</th>
               <th>Name</th>
               <th>Price</th>
-              <th>details</th>
               <th>Categories</th>
               <th>Action</th>
             </tr>
@@ -111,9 +110,8 @@
             <tr>
               <td>{{ ++$key }}</td>
               <td><img src="{{ asset('storage/'.$food->image) }}" alt="" class="w-100"></td>
-              <td>{{ $food->title }}</td>
+              <td class="text-center">{{ $food->title }}</td>
               <td>{{ $food->price }}</td>
-              <td>{{ $food->detail }}</td>
               <td>
                 @foreach ($food->categories as $item)
 
