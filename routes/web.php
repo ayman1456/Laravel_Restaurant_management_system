@@ -14,7 +14,7 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard')->middleware('role:admin');
 
     // Category Routes
     Route::get('/category', [CategoryController::class, 'showCategory'])->name('category.show');
