@@ -70,9 +70,9 @@
           </a>
 
         </li>
-        @hasanyrole(['admin','pos-manager'])
-        <li class="nav-item {{ request()->routeIs('food') ? 'active' : null }}">
-          <a href="{{ route('food.show') }}">
+        
+        <li class="nav-item {{ request()->routeIs('pos.show') ? 'active' : null }}">
+          <a href="{{ route('pos.show') }}">
 
             <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
 
@@ -80,7 +80,8 @@
           </a>
 
         </li>
-        @endhasanyrole
+       
+
         <li class="nav-item {{ request()->routeIs('food') ? 'active' : null }}">
           <a href="{{ route('food.show') }}">
 

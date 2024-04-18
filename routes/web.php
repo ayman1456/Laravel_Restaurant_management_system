@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
@@ -27,4 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/food/{id?}', [FoodController::class, 'saveFood'])->name('food.save');
     Route::get('/food/edit/{id}', [FoodController::class, 'editFood'])->name('food.edit');
     Route::get('/food-delete/{id}', [FoodController::class, 'deleteCategory'])->name('food.delete');
+
+
+    //pos routes
+    Route::get('/pos', [PosController::class, 'pos'])->name('pos.show');
+
 });
