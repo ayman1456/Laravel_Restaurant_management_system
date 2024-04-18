@@ -30,6 +30,7 @@
                         <td>name</td>
                         <td>price</td>
                         <td>category</td>
+                        <td>quantity</td>
                         <td>action</td>
                     </tr>
                     
@@ -53,8 +54,24 @@
                             @endforeach
                           </td>
                           <td>
-                            <a href="{{ route('food.edit', $food->id) }}" class="text-primary"><i class="lni lni-plus"></i></a>
+
+                            <div class="btn-group">
+                              <button data-id="#foodQuantity{{ $food->id }}" class="btn btn-sm btn-primary counter_btn" data-type="dec">-</button>
+                              <input type="text" size="2" value="1" class="form-control text-center">
+                              <button data-id="#foodQuantity{{ $food->id }}" class="btn btn-sm btn-primary counter_btn" data-type="inc">+</button>
+                            </div>
+
                             
+                          </td>
+
+                          
+                          <td class="text-center">
+                            <a href="#"  class="text-primary addFoodItems"><i class="lni lni-plus"></i></a>
+                            <form  action="{{ route('pos.store') }}" method="get">
+                              @csrf
+                              <input type="hidden" value="{{ $food->id }}"   name="food">
+                              <input type="hidden" value="1" name="quantity" id="foodQuantity{{ $food->id }}">
+                            </form>
                           </td>
                         </tr>
                         @endforeach
@@ -68,11 +85,12 @@
                         orders
                     </div>
                     <div class="card-body">
-                        <select id="cars" name="carlist" form="carform">
-                            <option value="table1">table1</option>
-                            <option value="table2">table2</option>
-                            <option value="table3">table3</option>
-                            <option value="box">box</option>
+                        <select id="cars" name="carlist" class="form-control" >
+                          @foreach ($tables as $table)
+                          
+                          <option value="{{ $table->id }}">{{ $table->name }}</option>
+                          @endforeach
+                            
                           </select>
                     </div>
                 </div>
@@ -81,4 +99,35 @@
 
           </div>
 
+          @push('customJs')
+            <script>
+
+              $('.addFoodItems').click(function(e){
+                e.preventDefault();
+                $(this).next('form').submit()
+              })
+
+             $('.counter_btn').click(function(){
+               let type = $(this).attr('data-type');
+               let value = $(this).parent().children('input').val()
+               
+               if(type == 'inc'){
+                let newVal = Number(value) + 1;
+                $(this).parent().children('input').val(newVal)
+                let qtyInput = $(this).attr('data-id')
+                $(qtyInput).val(newVal)
+              }else{
+                
+                if(value <= 1){
+                 return false;
+                }
+                  let newVal = Number(value) - 1;
+                  $(this).parent().children('input').val(newVal)
+                  let qtyInput = $(this).attr('data-id')
+                $(qtyInput).val(newVal)
+               }
+               console.log(type);
+             })
+            </script>
+          @endpush
   @endsection

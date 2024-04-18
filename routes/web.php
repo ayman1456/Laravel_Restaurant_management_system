@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
     //pos routes
     Route::get('/pos', [PosController::class, 'pos'])->name('pos.show');
+    Route::get('/add-food', [PosController::class, 'storeFood'])->name('pos.store');
+
 
     //table routes
     Route::get('/table', [TableController::class, 'table'])->name('table.show');
