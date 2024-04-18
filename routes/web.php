@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\TableController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 
@@ -32,5 +33,12 @@ Route::middleware('auth')->group(function () {
 
     //pos routes
     Route::get('/pos', [PosController::class, 'pos'])->name('pos.show');
+
+    //table routes
+    Route::get('/table', [TableController::class, 'table'])->name('table.show');
+    Route::get('/table/edit/{id}', [TableController::class, 'editTable'])->name('table.edit');
+    Route::post('/table/{id?}', [TableController::class, 'saveTable'])->name('table.save');
+    Route::get('/table-delete/{id}', [TableController::class, 'deleteTable'])->name('table.delete');
+    
 
 });

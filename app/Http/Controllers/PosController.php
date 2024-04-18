@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class PosController extends Controller
 {
+    
     function pos()
     {
         $food = Food::with('categories:title')->latest()->get();
