@@ -36,11 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-food', [PosController::class, 'storeFood'])->name('pos.store');
 
 
+    //* ORDER ROUTES
+    Route::post('/orders', [PosController::class, 'confirmOrder'])->name('pos.confirm.order');
+
     //table routes
     Route::get('/table', [TableController::class, 'table'])->name('table.show');
     Route::get('/table/edit/{id}', [TableController::class, 'editTable'])->name('table.edit');
     Route::post('/table/{id?}', [TableController::class, 'saveTable'])->name('table.save');
     Route::get('/table-delete/{id}', [TableController::class, 'deleteTable'])->name('table.delete');
-    
-
 });
