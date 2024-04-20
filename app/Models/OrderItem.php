@@ -12,6 +12,6 @@ class OrderItem extends Model
 
     function food()
     {
-        return $this->belongsTo(Food::class, 'product_id');
+        return $this->belongsTo(Food::class);
     }
 }

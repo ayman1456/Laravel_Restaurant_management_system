@@ -9,6 +9,7 @@ use App\Models\Table;
 use App\Models\Category;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PosController extends Controller
 {
@@ -36,8 +37,8 @@ class PosController extends Controller
 
     function confirmOrder(Request $req)
     {
-        $carts = Cart::where('user_id', auth()->user()->id)->get();
-        dd($carts);
+        $carts = Cart::with('food:id,price')->where('user_id', auth()->user()->id)->get();
+
 
         $order = new Order();
         $order->table_id = $req->table;
@@ -46,11 +47,35 @@ class PosController extends Controller
         $order->payment = $req->payment ?? 'Cash';
         $order->save();
 
-
+        $orderItems = [];
         if ($order) {
-            $orderItem = new OrderItem();
-            $orderItem->order_id = $order->id;
-            $orderItem->product_id = $cart->food_id;
+            foreach ($carts as $cart) {
+                $orderItem = new OrderItem();
+                $orderItem->order_id = $order->id;
+                $orderItem->food_id = $cart->food_id;
+                $orderItem->qty = $cart->qty;
+                $orderItem->price = $cart->qty * $cart->food->price;
+                $orderItem->save();
+                $orderItems[] = $orderItem;
+                $cart->delete();
+            }
         }
+        return redirect()->route('invoice.view', $order);
+        // return view('backend.Invoice', );
+    }
+
+    function invoiceView($order)
+    {
+        $order = Order::with('orderItems.food:id,title')->find($order);
+        // dd($order);
+        return view('backend.Invoice', compact('order'));
+    }
+
+    function invoiceOrder($order)
+    {
+        $order = Order::with('orderItems.food:id,title')->find($order);
+        // dd($order->toArray());
+        $pdf = Pdf::loadView('layouts.utils.invoice', ['order' => $order->toArray()]);
+        return $pdf->download('invoice.pdf');
     }
 }

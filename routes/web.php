@@ -34,10 +34,11 @@ Route::middleware('auth')->group(function () {
     //pos routes
     Route::get('/pos', [PosController::class, 'pos'])->name('pos.show');
     Route::get('/add-food', [PosController::class, 'storeFood'])->name('pos.store');
-
-
+    
     //* ORDER ROUTES
     Route::post('/orders', [PosController::class, 'confirmOrder'])->name('pos.confirm.order');
+    Route::get('/invoice-view/{order}', [PosController::class, 'invoiceView'])->name('invoice.view');
+    Route::get('/invoice-download/{order}', [PosController::class, 'invoiceOrder'])->name('invoice.download');
 
     //table routes
     Route::get('/table', [TableController::class, 'table'])->name('table.show');
