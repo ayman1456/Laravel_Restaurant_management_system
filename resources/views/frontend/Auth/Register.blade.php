@@ -17,16 +17,33 @@
         <div class="col-lg-5 mx-auto mt-5">
             <div class="card">
                 <div class="card-header">
-                    Login
+                    Register
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('user.login.verify') }}" method="POST">
+                    <form action="{{ route('user.register.verify') }}" method="POST">
                         @csrf
+                        <input type="text" class="form-control" placeholder="User Name" name="name">
+                        @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        <input type="text" class="form-control" placeholder="Phone" name="phone">
+                        @error('phone')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                         <input type="text" class="form-control" placeholder="Email" name="email">
                         @error('email')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
-                        <input type="text" class="form-control" placeholder="password" name="password">
+                        <input type="text" class="form-control" placeholder="Password" name="password">
+                        @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        <input type="text" class="form-control" placeholder="Password Confirm"
+                            name="password_confirmation">
+                        @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+
                         <button class="btn btn-primary">Login</button>
                     </form>
                 </div>
