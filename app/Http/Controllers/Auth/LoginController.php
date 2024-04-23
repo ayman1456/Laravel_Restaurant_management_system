@@ -25,7 +25,17 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    // protected $redirectTo = '/dashboard';
+    function redirectTo()
+    {
+        if (auth()->user()->getRoleNames()->first() == 'admin') {
+            return "/dashboard";
+        } else if (auth()->user()->getRoleNames()->first() == 'pos-manager') {
+            return "/pos";
+        } else {
+            return "/kitchen-order";
+        }
+    }
 
     /**
      * Create a new controller instance.

@@ -40,7 +40,6 @@
           </a>
 
         </li>
-        @endrole
 
 
         <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : null }}">
@@ -70,7 +69,19 @@
           </a>
 
         </li>
-        
+
+        <li class="nav-item {{ request()->routeIs('table') ? 'active' : null }}">
+          <a href="{{ route('table.show') }}">
+
+            <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
+
+            <span class="text">Manage Tables </span>
+          </a>
+
+        </li>
+        @endrole
+
+        @hasanyrole('admin|pos-manager')
         <li class="nav-item {{ request()->routeIs('pos.show') ? 'active' : null }}">
           <a href="{{ route('pos.show') }}">
 
@@ -80,17 +91,10 @@
           </a>
 
         </li>
-       
+        @endhasanyrole
 
-        <li class="nav-item {{ request()->routeIs('food') ? 'active' : null }}">
-          <a href="{{ route('food.show') }}">
 
-            <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
 
-            <span class="text">Kitchen Orders</span>
-          </a>
-
-        </li>
         {{-- <li class="nav-item nav-item-has-children">
           <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_1" aria-controls="ddmenu_1"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -247,7 +251,8 @@
   <!-- ======== main-wrapper end =========== -->
 
   <!-- ========= All Javascript files linkup ======== -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="{{ asset('backend/assets/js/bootstrap.bundle.min.js') }} "></script>
   <script src="{{ asset('backend/assets/js/Chart.min.js') }}  "></script>
   <script src="{{ asset('backend/assets/js/dynamic-pie-chart.js') }}  "></script>
