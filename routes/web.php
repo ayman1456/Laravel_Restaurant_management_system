@@ -7,6 +7,8 @@ use App\Http\Controllers\FoodController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Frontend\Auth\LoginController;
+use App\Http\Controllers\Frontend\Auth\RegisterController;
 
 Route::get('/', function () {
     return view('frontend.Homapage');
@@ -34,7 +36,8 @@ Route::middleware('auth')->group(function () {
     //pos routes
     Route::get('/pos', [PosController::class, 'pos'])->name('pos.show');
     Route::get('/add-food', [PosController::class, 'storeFood'])->name('pos.store');
-    
+    Route::get('/remove-food/{id}', [PosController::class, 'removeFood'])->name('pos.remove');
+
     //* ORDER ROUTES
     Route::post('/orders', [PosController::class, 'confirmOrder'])->name('pos.confirm.order');
     Route::get('/invoice-view/{order}', [PosController::class, 'invoiceView'])->name('invoice.view');
@@ -46,3 +49,18 @@ Route::middleware('auth')->group(function () {
     Route::post('/table/{id?}', [TableController::class, 'saveTable'])->name('table.save');
     Route::get('/table-delete/{id}', [TableController::class, 'deleteTable'])->name('table.delete');
 });
+
+
+
+
+
+
+
+
+//* FRONTEND ROUTES
+
+Route::get('/sign-in', [LoginController::class, 'showLoginForm'])->name('user.login');
+Route::post('/sign-in', [LoginController::class, 'login'])->name('user.login.verify');
+Route::get('/sign-up', [RegisterController::class, 'showRegistrationForm'])->name('user.register');
+Route::post('/sign-up', [RegisterController::class, 'register'])->name('user.register.verify');
+Route::get('/sign-out', [LoginController::class, 'logout'])->name('user.logout');

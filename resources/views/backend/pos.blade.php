@@ -94,8 +94,15 @@
             <div class="foodItems my-3">
               <div class="row align-items-center">
                 <div class="col-3">
-                  <img src="{{ asset('storage/'. $cart->food->image) }}" alt="{{ $cart->food->title }}" width="100%"
-                    class="rounded">
+                  <div class="position-relative">
+                    <img src="{{ asset('storage/'. $cart->food->image) }}" alt="{{ $cart->food->title }}" width="100%"
+                      class="rounded">
+                    <a href="{{ route('pos.remove', $cart->id) }}">
+                      <span style="top:-5px;left:-5px;position: absolute;cursor:pointer;" class="text-danger">
+                        <i class="lni lni-cross-circle"></i>
+                      </span>
+                    </a>
+                  </div>
                 </div>
                 <div class="col">
                   <h5>{{ $cart->food->title }}</h5>
@@ -116,8 +123,8 @@
             <input type="hidden" value="{{ $totalQty }}" name="qty">
             <hr>
             <h4>Total Price: <span class="float-end">{{ $total }} tk</span></h4>
-            <div class="text-end mt-3"><button type="submit"
-                class="btn btn-sm btn-success rounded-0 ">Confirm Order</button></div>
+            <div class="text-end mt-3"><button type="submit" class="btn btn-sm btn-success rounded-0 ">Confirm
+                Order</button></div>
           </div>
         </form>
       </div>

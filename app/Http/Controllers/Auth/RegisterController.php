@@ -28,6 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    use RegistersUsers;
     protected $redirectTo = '/dashboard';
 
     /**

@@ -17,7 +17,7 @@ class PosController extends Controller
     function pos()
     {
         $food = Food::with('categories:title')->latest()->get();
-        $carts = Cart::with('food')->where('user_id', auth()->user()->id)->get();
+        $carts = Cart::with('food')->where('user_id', auth()->user()->id)->latest()->get();
         $totalQty = $carts->sum('qty');
 
         $tables = Table::get();
@@ -77,5 +77,11 @@ class PosController extends Controller
         // dd($order->toArray());
         $pdf = Pdf::loadView('layouts.utils.invoice', ['order' => $order->toArray()]);
         return $pdf->download('invoice.pdf');
+    }
+
+    function removeFood($id)
+    {
+        Cart::findOrFail($id)->delete();
+        return back();
     }
 }
