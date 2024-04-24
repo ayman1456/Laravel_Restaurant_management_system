@@ -14,6 +14,16 @@
                 background-color:black;
                 font-family: 'Times New Roman', Times, serif;
             }
+            
+::placeholder {
+  color:#6A6A6A;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Edge 12-18 */
+  color: red;
+}
+
             </style>
 </head>
 
