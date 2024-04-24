@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
-use App\Http\Controllers\Frontend\ProfileController;
 
 
 
@@ -70,6 +71,9 @@ Route::post('/sign-in', [LoginController::class, 'login'])->name('user.login.ver
 Route::get('/sign-up', [RegisterController::class, 'showRegistrationForm'])->name('user.register');
 Route::post('/sign-up', [RegisterController::class, 'register'])->name('user.register.verify');
 Route::get('/sign-out', [LoginController::class, 'logout'])->name('user.logout');
+
+//menu
+Route::get('/menu', [MenuController::class, 'menu'])->name('menu.show');
 
 Route::middleware('isCustomer')->group(function () {
     Route::get('/my-profile', [ProfileController::class, 'show'])->name('user.profile');
