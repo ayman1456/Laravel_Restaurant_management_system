@@ -59,6 +59,18 @@
               <li class="nav-item">
                 <a class="nav-link " href="{{ route('user.register') }}" style="color: #f7ad1d">Register</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{ route('user.profile') }}" style="color: #f7ad1d" >Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('user.orders') }}" style="color: #f7ad1d">My Orders</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('user.settings') }}" style="color: #f7ad1d">Profile Setting</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{{ route('user.logout') }}"style="color: #f7ad1d">Logout</a>
+              </li>
             </ul>
           </div>
         </div>

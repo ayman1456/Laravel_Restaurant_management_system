@@ -1,62 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.frontendApp')
+@section('content')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css'
-        integrity='sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=='
-        crossorigin='anonymous' />
-</head>
-
-<body>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <ul>
-                    <li><a href="{{ route('user.profile') }}">Dashbaord</a></li>
-                    <li><a href="{{ route('user.orders') }}">My Orders</a></li>
-                    <li><a href="{{ route('user.settings') }}">Settings</a></li>
-                    <li><a href="{{ route('user.logout') }}">Log out</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-8">
+            <!--content-->
+            <div class="col-lg-8  mx-auto mt-5">
                 <form action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    <div>
+                    <div class="mx-auto " style="width: fit-content">
                         <label for="profile">
                             <img src="{{ getProfileImg() }}" alt="" class="imagePreview"
-                                style="width: 80px;height:80px; border-radius:50%;margin-bottom: 20px;cursor:pointer;">
+                                style="width: 160px;height:160px; border-radius:50%;margin-bottom: 20px;cursor:pointer;">
                         </label>
                         <input type="file" class="d-none" id="profile" name="profile">
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-lg-6"><input type="text" name="name" class="form-control"
-                                value="{{ auth('customer')->user()->name }}" placeholder="Your Name"></div>
-
+                    <div class="mx-auto " style="width:fit-content" >
+                        
+                        <div class="my-2">
+                            <input type="text" placeholder="Name" name="name"
+                            value="{{ auth('customer')->user()->name }}"
+                                style="background-color:black; border:1px solid #6A6A6A; width:400px; border-radius:10px;padding:5px;color:white">
+                        </div>
+                       
+                        <div class="my-2">
+                            <input type="email" placeholder="Email" name="email" readonly
+                            value="{{ auth('customer')->user()->email }}"
+                                style="background-color:black; border:1px solid #6A6A6A; width:400px; border-radius:10px;padding:5px;color:white">
+                        </div>
+                        <div class="my-2">
+                            <input type="email" placeholder="Phone" name="phone" readonly
+                            value="{{ auth('customer')->user()->phone }}"
+                                style="background-color:black; border:1px solid #6A6A6A; width:400px; border-radius:10px;padding:5px;color:white">
+                        </div>
+                        <div class="my-2">
+                            <textarea
+                            style="background-color:black; border:1px solid #6A6A6A; width:400px; border-radius:10px;padding:5px;color:white"
+                            name="address" placeholder="Address"
+                            >
+                            {{ auth('customer')->user()->address }}
+                            </textarea>
+                        </div>
+                        <div class="buttom mx-auto" style="width: fit-content">
+                        <button class="my-2 mx-auto"
+                        style="background-color: #f7ad1d;color:black;padding:5px 20px 5px 20px; border:0px;border-radius:10px;color:white">Save changes</button>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6"><input type="text" name="email" class="form-control" readonly
-                                value="{{ auth('customer')->user()->email }}" placeholder="Your Name"></div>
-                        <div class="col-lg-6"><input type="email" name="phone" class="form-control" readonly
-                                value="{{ auth('customer')->user()->phone }}" placeholder="Your email"></div>
-                    </div>
 
-                    <textarea name="address" class="form-control"
-                        placeholder="Address">{{ auth('customer')->user()->address }}</textarea>
-                    <button class=" btn btn-primary mt-2 ">Save Changes</button>
+                    
 
 
                 </form>
             </div>
-        </div>
-    </div>
+      
+  
 
     <script>
         let foodImageInput = document.querySelector('#profile')
@@ -68,7 +65,5 @@
 
     </script>
 
-
-</body>
-
-</html>
+<!--Content end-->
+@endsection
