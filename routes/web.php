@@ -9,6 +9,7 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
 
@@ -81,3 +82,18 @@ Route::middleware('isCustomer')->group(function () {
     Route::get('/my-profile/my-orders', [ProfileController::class, 'orders'])->name('user.orders');
     Route::POST('/my-profile/settings', [ProfileController::class, 'updateprofile'])->name('user.profile.update');
 });
+
+
+// SSLCOMMERZ Start
+Route::get('/ssl-pay', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
