@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Order;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,5 +34,12 @@ class ProfileController extends Controller
 
 
         return back();
+    }
+
+    function orders()
+    {
+        $orders = Order::with('table')->where('customer_id', auth('customer')->id())->get();
+
+        return view('frontend.Order', compact('orders'));
     }
 }
