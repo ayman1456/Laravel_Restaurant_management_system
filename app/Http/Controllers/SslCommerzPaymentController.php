@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Customer;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Library\SslCommerz\SslCommerzNotification;
 
 class SslCommerzPaymentController extends Controller
@@ -91,6 +94,18 @@ class SslCommerzPaymentController extends Controller
             ]
         );
 
+        if ($update_product) {
+            $carts = Cart::with('food:id,price')->where('customer_id', auth('customer')->user()->id)->get();
+            foreach ($carts as $item) {
+                $orderItem = new OrderItem();
+                $orderItem->order_id = $update_product->id;
+                $orderItem->food_id = $item->food_id;
+                $orderItem->qty = $item->qty;
+                $orderItem->price = $item->food->price;
+                $orderItem->save();
+            }
+        }
+
 
 
         $sslc = new SslCommerzNotification();
@@ -101,6 +116,54 @@ class SslCommerzPaymentController extends Controller
             print_r($payment_options);
             $payment_options = array();
         }
+    }
+    public function payViaCash(Request $request)
+    {
+
+
+        # Here you have to receive all the order data to initate the payment.
+        # Lets your oder trnsaction informations are saving in a table called "orders"
+        # In orders table order uniq identity is "transaction_id","status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
+
+
+
+        $cartQuantity = Cart::where('customer_id', auth('customer')->id())->sum('qty');
+        #Before  going to initiate the payment order status need to update as Pending.
+        $update_product = Order::create(
+
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'total_price' => $request->amount,
+                'status' => 'Pending',
+                'address' => $request->address,
+                'address2' => $request->address2,
+                'state' => $request->state,
+                'country' => $request->country,
+                'zip' => $request->zip,
+                'customer_id' => auth('customer')->id(),
+                'qty' => $cartQuantity,
+                'transaction_id' => uniqid(),
+                'currency' => 'BDT',
+                'payment' => 'cash',
+
+            ]
+        );
+
+        if ($update_product) {
+            $carts = Cart::with('food:id,price')->where('customer_id', auth('customer')->user()->id)->get();
+            foreach ($carts as $item) {
+                $orderItem = new OrderItem();
+                $orderItem->order_id = $update_product->id;
+                $orderItem->food_id = $item->food_id;
+                $orderItem->qty = $item->qty;
+                $orderItem->price = $item->food->price;
+                $orderItem->save();
+                $item->delete();
+            }
+        }
+        return redirect()->route('user.profile');
     }
 
     public function success(Request $request)
@@ -116,20 +179,24 @@ class SslCommerzPaymentController extends Controller
         #Check order status in order tabel against the transaction id or order id.
         $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'currency', 'total_price')->first();
+            ->select('customer_id', 'transaction_id', 'status', 'currency', 'total_price')->first();
 
         if ($order_details->status == 'Pending') {
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
 
             if ($validation) {
-                /*
-                That means IPN did not work or IPN URL was not set in your merchant panel. Here you need to update order status
-                in order table as Processing or Complete.
-                Here you can also sent sms or email for successfull transaction to customer
-                */
+                $carts = Cart::with('food:id,price')->where('customer_id', $order_details->customer_id)->get();
+                $user = Customer::find($order_details->customer_id) ?? null;
+                if ($user) {
+
+                    Auth::guard('customer')->login($user);
+                }
+                foreach ($carts as $item) {
+                    $item->delete();
+                }
                 $update_product = DB::table('orders')
                     ->where('transaction_id', $tran_id)
-                    ->update(['status' => 'Processing']);
+                    ->update(['status' => 'Complete']);
 
                 echo "<br >Transaction is successfully Completed";
             }

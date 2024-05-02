@@ -4,7 +4,7 @@
 <div class="mt-5">
     <div class="text-end">
         <div class="btn-group">
-            <a href="#" class="btn btn-primary btn-sm">Print</a>
+            <a href="#" onclick="window.print()" class="btn btn-primary btn-sm">Print</a>
             <a href="{{ route('invoice.download', $order->id) }}" class="btn btn-warning btn-sm">Download</a>
         </div>
     </div>
@@ -37,7 +37,7 @@
             </tr>
             <tr>
                 <td>
-                    <p style="padding: 10px 20px "><b>Date: {{ today()->format('d M, Y') }}</b></p>
+                    <p style="padding: 10px 20px "><b>Date: {{ $order->created_at->format('d M, Y') }}</b></p>
                 </td>
             </tr>
             <tr>

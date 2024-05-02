@@ -42,7 +42,7 @@
             <div class="col-md-4 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Your cart</span>
-                    <span class="badge badge-secondary badge-pill">3</span>
+
                 </h4>
                 <ul class="list-group mb-3">
                     @php
@@ -77,13 +77,14 @@
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Billing address</h4>
-                <form method="POST" class="needs-validation" novalidate>
+                <form method="POST" class="needs-validation" novalidate action="{{ route('pay.cash') }}">
+                    @csrf
                     <div class="row">
                         <div class="col-md-12 mb-3">
 
                             <label for="firstName">Full name</label>
-                            <input type="text" name="customer_name" class="form-control" id="customer_name"
-                                placeholder="" value="{{ auth('customer')->user()->name }}" required>
+                            <input type="text" name="name" class="form-control" id="customer_name" placeholder=""
+                                value="{{ auth('customer')->user()->name }}" required>
                             <div class="invalid-feedback">
                                 Valid customer name is required.
                             </div>
@@ -96,8 +97,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">+88</span>
                             </div>
-                            <input type="text" name="customer_mobile" class="form-control" id="mobile"
-                                placeholder="Mobile" value="{{ auth('customer')->user()->phone }}" required>
+                            <input type="text" name="phone" class="form-control" id="mobile" placeholder="Mobile"
+                                value="{{ auth('customer')->user()->phone }}" required>
                             <div class="invalid-feedback" style="width: 100%;">
                                 Your Mobile number is required.
                             </div>
@@ -106,8 +107,8 @@
 
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                        <input type="email" name="customer_email" class="form-control" id="email"
-                            placeholder="you@example.com" value="{{ auth('customer')->user()->email }}" required>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com"
+                            value="{{ auth('customer')->user()->email }}" required>
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -115,7 +116,7 @@
 
                     <div class="mb-3">
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St"
+                        <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St"
                             value="{{ auth('customer')->user()->address }}" required>
                         <div class="invalid-feedback">
                             Please enter your shipping address.
@@ -124,13 +125,14 @@
 
                     <div class="mb-3">
                         <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                        <input type="text" class="form-control" name="address2" id="address2"
+                            placeholder="Apartment or suite">
                     </div>
 
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="country">Country</label>
-                            <select class="custom-select d-block w-100" id="country" required>
+                            <select class="custom-select d-block w-100" id="country" required name="country">
                                 <option value="">Choose...</option>
                                 <option selected value="Bangladesh">Bangladesh</option>
                             </select>
@@ -140,7 +142,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="state">State</label>
-                            <select class="custom-select d-block w-100" id="state" required>
+                            <select class="custom-select d-block w-100" id="state" required name="state">
                                 <option disabled selected>Choose...</option>
                                 @foreach ($districts as $district)
 
@@ -153,7 +155,8 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="zip">Zip</label>
-                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                            <input type="hidden" value="{{ $total+ $settings->delivery }}" name="amount">
+                            <input type="text" class="form-control" id="zip" placeholder="" required name="zip">
                             <div class="invalid-feedback">
                                 Zip code required.
                             </div>
@@ -162,8 +165,8 @@
 
                     <hr class="mb-4">
                     <div class="d-flex">
-                        <a href="#" class="btn btn-primary d-inline-block mr-3">Pay With Cash</a>
-                        <button class="btn btn-primary btn-lg btn-block" id="sslczPayBtn"
+                        <button type="submit" class="btn btn-primary d-inline-block mr-3">Pay With Cash</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" id="sslczPayBtn"
                             token="if you have any token validation"
                             postdata="your javascript arrays or objects which requires in backend"
                             order="If you already have the transaction generated for current order"
@@ -176,7 +179,7 @@
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; {{ today()->year }} Dawat</p>
-        
+
         </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -202,7 +205,7 @@
             obj.country = $('#country').val();
             obj.state = $('#state').val();
             obj.zip = $('#zip').val();
-            obj.amount = {{ $total }};
+            obj.amount = {{ $total + $settings->delivery }};
             
             
             $('#sslczPayBtn').prop('postdata', obj);

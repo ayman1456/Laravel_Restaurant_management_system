@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/orders', [PosController::class, 'confirmOrder'])->name('pos.confirm.order');
         Route::get('/invoice-view/{order}', [PosController::class, 'invoiceView'])->name('invoice.view');
         Route::get('/invoice-download/{order}', [PosController::class, 'invoiceOrder'])->name('invoice.download');
+        Route::get('/orders/views', [PosController::class, 'viewOrders'])->name('pos.order.view');
     });
 });
 
@@ -102,6 +103,7 @@ Route::middleware('isCustomer')->group(function () {
 
     // Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
     Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+    Route::post('/payViaCash', [SslCommerzPaymentController::class, 'payViaCash'])->name('pay.cash');
 
     Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
     Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);

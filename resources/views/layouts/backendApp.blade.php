@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon" />
-  <title>Blank Page | PlainAdmin Demo</title>
+  <title>Dawat Restaurant</title>
 
   <!-- ========== All CSS files linkup ========= -->
   <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap.min.css') }}" />
@@ -14,11 +14,16 @@
   <link rel="stylesheet" href="{{ asset('backend/assets/css/materialdesignicons.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('backend/assets/css/fullcalendar.css') }}" />
   <link rel="stylesheet" href="{{ asset('backend/assets/css/main.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
   <style>
-    *{
-      font-family: 'Times New Roman', Times, serif;
+    * {
+      font-family: "Roboto", sans-serif;
     }
-    </style>
+  </style>
   @stack('customCss')
 </head>
 
@@ -29,7 +34,7 @@
   <aside class="sidebar-nav-wrapper">
     <div class="navbar-logo">
       <a href="index.html">
-        <img src="{{ asset('storage/logo/dawat.png') }}"  style="width: 100%" alt="logo" />
+        <img src="{{ asset('storage/logo/dawat.png') }}" style="width: 100%" alt="logo" />
       </a>
     </div>
     <nav class="sidebar-nav">
@@ -96,6 +101,15 @@
           </a>
 
         </li>
+        <li class="nav-item {{ request()->routeIs('pos.order.view') ? 'active' : null }}">
+          <a href="{{ route('pos.order.view') }}">
+
+            <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
+
+            <span class="text">Orders</span>
+          </a>
+
+        </li>
         @endhasanyrole
 
 
@@ -135,7 +149,7 @@
                   <i class="lni lni-chevron-left me-2"></i> Menu
                 </button>
               </div>
-             
+
             </div>
           </div>
           <div class="col-lg-7 col-md-7 col-6">
@@ -221,7 +235,7 @@
     <!-- ========== section end ========== -->
 
     <!-- ========== footer start =========== -->
-   
+
     <!-- ========== footer end =========== -->
   </main>
   <!-- ======== main-wrapper end =========== -->

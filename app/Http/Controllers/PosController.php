@@ -84,4 +84,11 @@ class PosController extends Controller
         Cart::findOrFail($id)->delete();
         return back();
     }
+
+    function viewOrders()
+    {
+        $orders = Order::with('table')->get();
+        // dd($orders);
+        return view('backend.order', compact('orders'));
+    }
 }
