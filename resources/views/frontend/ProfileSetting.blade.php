@@ -35,7 +35,7 @@
                         </div>
                         <div class="my-2">
                             <textarea
-                            style="background-color:black; border:1px solid #6A6A6A; width:400px; border-radius:10px;padding:5px;color:white"
+                            style="background-color:black; border:1px solid #6A6A6A; width:400px; border-radius:10px;padding:5px;color:white!important "
                             name="address" placeholder="Address"
                             >
                             {{ auth('customer')->user()->address }}

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->composer('layouts.frontendApp', function ($view) {
+            $view->with('cartCount', Cart::where('customer_id', auth('customer')->user()->id ?? null)->count());
+        });
     }
 }
