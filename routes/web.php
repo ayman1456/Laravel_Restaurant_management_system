@@ -76,6 +76,9 @@ Route::get('/sign-out', [LoginController::class, 'logout'])->name('user.logout')
 
 //menu
 Route::get('/menu', [MenuController::class, 'menu'])->name('menu.show');
+Route::get('/food/{id}', [MenuController::class, 'showFood'])->name('menu.show.food');
+Route::post('/food/review/{id}', [MenuController::class, 'storeReview'])->name('menu.review.store');
+
 
 Route::middleware('isCustomer')->group(function () {
     Route::get('/my-profile', [ProfileController::class, 'show'])->name('user.profile');

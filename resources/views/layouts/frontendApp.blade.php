@@ -12,6 +12,7 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css'
     integrity='sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=='
     crossorigin='anonymous' />
+  @stack('customCss')
   <style>
     body {
       background-color: #171717;
@@ -22,6 +23,13 @@
       color: white !important;
       opacity: 1;
       /* Firefox */
+    }
+
+    .my-input {
+      background: transparent;
+      width: 100%;
+      border: 1px solid #f7ad1d;
+      color: white;
     }
 
     ::-ms-input-placeholder {
@@ -37,6 +45,10 @@
 
     .topNav li a.active {
       color: #f7ad1d !important;
+    }
+
+    a {
+      text-decoration: none;
     }
   </style>
 </head>
@@ -95,10 +107,12 @@
                 href="{{ route('user.profile') }}" style="color: #999"><i class="fa-solid fa-heart"></i> Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ request()->routeIs('cart.*') ? 'active' : null }}"
-                href="{{ route('cart.view') }}" style="color: #999;position: relative;">
+              <a class="nav-link {{ request()->routeIs('cart.*') ? 'active' : null }}" href="{{ route('cart.view') }}"
+                style="color: #999;position: relative;">
                 <i class="fa-solid fa-cart-shopping"></i> Cart
-                <span style="display:inline-block; background:#f7ad1d; min-width: 20px;min-height:20px;color:black;border-radius:50%;text-align:center;line-height:20px;font-weight:800">{{ $cartCount ?? 0 }}</span>
+                <span
+                  style="display:inline-block; background:#f7ad1d; min-width: 20px;min-height:20px;color:black;border-radius:50%;text-align:center;line-height:20px;font-weight:800">{{
+                  $cartCount ?? 0 }}</span>
               </a>
             </li>
             <li class="nav-item">

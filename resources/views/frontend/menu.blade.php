@@ -18,11 +18,14 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-3">
-                    <img src="{{ asset('storage/'. $food->image) }}" style="width: 100%; border-radius:7px">
+                    <a href="{{ route('menu.show.food', $food->id) }}"><img src="{{ asset('storage/'. $food->image) }}"
+                            style="width: 100%; border-radius:7px"></a>
                 </div>
                 <div class="col-lg-9">
                     <div class="title">
-                        <h2 style="color: #f7ad1d">{{ $food->title }}</h2>
+                        <a href="{{ route('menu.show.food', $food->id) }}">
+                            <h2 style="color: #f7ad1d">{{ $food->title }}</h2>
+                        </a>
                     </div>
                     <div class="dishdetails">
                         <p style="color:rgb(167, 167, 167)">{{ $food->detail }}</p>

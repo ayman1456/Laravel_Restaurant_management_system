@@ -10,9 +10,14 @@ class Food extends Model
     use HasFactory;
 
 
-    function categories() {
+    function categories()
+    {
         return $this->belongsToMany(Category::class);
     }
 
 
+    function reviews()
+    {
+        return  $this->hasMany(Review::class);
+    }
 }
