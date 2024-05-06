@@ -185,22 +185,8 @@
                     </div>
                   </li>
                   <li class="divider"></li>
-                  <li>
-                    <a href="#0">
-                      <i class="lni lni-user"></i> View Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#0">
-                      <i class="lni lni-alarm"></i> Notifications
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                  </li>
+                  
+                  
                   <li class="divider"></li>
                   <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
