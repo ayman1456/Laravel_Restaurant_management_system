@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -73,5 +74,11 @@ class RegisterController extends Controller
         ]);
         $user->assignRole($data['role']);
         return $user;
+    }
+
+    public function showRegistrationForm()
+    {
+        $roles = Role::get();
+        return view('auth.register', compact('roles'));
     }
 }

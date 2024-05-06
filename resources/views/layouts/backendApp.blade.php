@@ -55,7 +55,7 @@
         <li class="nav-item {{ request()->routeIs('category.*') ? 'active' : null }}">
           <a href="{{ route('category.show') }}">
 
-            <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
+            <span class="me-2"> <i class="lni lni-grid-alt"></i></span>
 
             <span class="text">Categories</span>
           </a>
@@ -64,7 +64,7 @@
         <li class="nav-item {{ request()->routeIs('food') ? 'active' : null }}">
           <a href="{{ route('food.show') }}">
 
-            <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
+            <span class="me-2"> <i class="lni lni-fresh-juice"></i></span>
 
             <span class="text">Food</span>
           </a>
@@ -73,7 +73,7 @@
         <li class="nav-item {{ request()->routeIs('register') ? 'active' : null }}">
           <a href="{{ route('register') }}">
 
-            <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
+            <span class="me-2"> <i class="lni lni-users"></i></span>
 
             <span class="text">Employee Management</span>
           </a>
@@ -83,7 +83,7 @@
         <li class="nav-item {{ request()->routeIs('table') ? 'active' : null }}">
           <a href="{{ route('table.show') }}">
 
-            <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
+            <span class="me-2"> <i class="lni lni-service"></i></span>
 
             <span class="text">Manage Tables </span>
           </a>
@@ -95,7 +95,7 @@
         <li class="nav-item {{ request()->routeIs('pos.show') ? 'active' : null }}">
           <a href="{{ route('pos.show') }}">
 
-            <span class="me-2"> <i class="lni lni-pie-chart"></i></span>
+            <span class="me-2"> <i class="lni lni-layout"></i></span>
 
             <span class="text">Pos System</span>
           </a>
