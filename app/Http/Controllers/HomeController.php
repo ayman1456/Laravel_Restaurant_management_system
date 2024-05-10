@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +22,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function home()
     {
-        return view('home');
+        $foods = Food::take(12)->get();
+        $banners = $foods->where('featured',true);
+        // dd($banners);
+        return view('frontend.Homapage', compact('banners'));
     }
 }

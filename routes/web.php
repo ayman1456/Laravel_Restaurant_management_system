@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
-use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\CheckoutController;
 
 Auth::routes();
 
@@ -64,9 +65,7 @@ Route::middleware('auth')->group(function () {
 
 //* FRONTEND ROUTES
 
-Route::get('/', function () {
-    return view('frontend.Homapage');
-})->name('frontend.homepage');
+Route::get('/', [HomeController::class, 'home'])->name('frontend.homepage');
 
 Route::get('/sign-in', [LoginController::class, 'showLoginForm'])->name('user.login');
 Route::post('/sign-in', [LoginController::class, 'login'])->name('user.login.verify');

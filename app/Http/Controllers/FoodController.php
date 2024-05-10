@@ -45,6 +45,7 @@ class FoodController extends Controller
             $fileName = $req->image->store('foods',  'public');
             $food->image = $fileName;
         }
+        $food->featured = $req->featured;
         $food->save();
         $food->categories()->sync($req->categories);
         return back();

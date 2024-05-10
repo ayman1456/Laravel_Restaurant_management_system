@@ -12,6 +12,8 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css'
     integrity='sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=='
     crossorigin='anonymous' />
+    <link rel="stylesheet" href="{{ asset('frontend/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/app.css') }}">
   @stack('customCss')
   <style>
     body {
@@ -138,13 +140,15 @@
   <!--navbar ends-->
 
 
-  <div style="padding: 120px 0 0 0;">@yield('content')</div>
+  <div style="padding: 158px 0 0 0;">@yield('content')</div>
 
 
 
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="{{ asset('frontend/slick.min.js') }}">
+  </script>
   @stack('customJs')
-
 </body>
 
 </html>

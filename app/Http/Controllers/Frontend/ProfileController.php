@@ -22,7 +22,9 @@ class ProfileController extends Controller
     function updateprofile(Request $request)
     {
         $fileName = null;
+       
         if ($request->hasFile('profile')) {
+           
             $fileName = $request->profile->store('users', 'public');
         }
         // dd($request->all());
