@@ -52,7 +52,7 @@
                                     </a>
                                 </div>
                                 <div class="dishdetails">
-                                    <p style="color:rgb(167, 167, 167)">{{ $food->detail }}</p>
+                                    <p style="color:rgb(167, 167, 167)">{{ str($food->detail)->substr(0, 15).'...' }}</p>
                                 </div>
                                 <div class="priceandbutton " style="display:flex; justify-content:space-between;">
                                     <h5 style="color: #f7ad1d"> {{ $food->price }}Tk</h5>
