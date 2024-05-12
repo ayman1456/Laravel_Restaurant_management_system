@@ -115,16 +115,7 @@
                     <p class="text-sm text-medium text-center text-gray">
                       Easy Sign In With
                     </p>
-                    <div class="button-group pt-40 pb-40 d-flex justify-content-center flex-wrap">
-                      <button class="main-btn primary-btn-outline m-2">
-                        <i class="lni lni-facebook-fill mr-10"></i>
-                        Facebook
-                      </button>
-                      <button class="main-btn danger-btn-outline m-2">
-                        <i class="lni lni-google mr-10"></i>
-                        Google
-                      </button>
-                    </div>
+                   
                     <p class="text-sm text-medium text-dark text-center">
                       Don’t have any account yet?
                       <a href="signup.html">Create an account</a>
@@ -140,33 +131,7 @@
       </section>
       <!-- ========== signin-section end ========== -->
 
-      <!-- ========== footer start =========== -->
-      <footer class="footer">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-6 order-last order-md-first">
-              <div class="copyright text-center text-md-start">
-                <p class="text-sm">
-                  Designed and Developed by
-                  <a href="https://plainadmin.com" rel="nofollow" target="_blank">
-                    PlainAdmin
-                  </a>
-                </p>
-              </div>
-            </div>
-            <!-- end col-->
-            <div class="col-md-6">
-              <div class="terms d-flex justify-content-center justify-content-md-end">
-                <a href="#0" class="text-sm">Term & Conditions</a>
-                <a href="#0" class="text-sm ml-15">Privacy & Policy</a>
-              </div>
-            </div>
-          </div>
-          <!-- end row -->
-        </div>
-        <!-- end container -->
-      </footer>
-      <!-- ========== footer end =========== -->
+     
     </main>
     <!-- ======== main-wrapper end =========== -->
 

@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -24,9 +24,9 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $foods = Food::take(12)->get();
+        $foods = Food::take(12)->latest()->get();
         $banners = $foods->where('featured',true);
         // dd($banners);
-        return view('frontend.Homapage', compact('banners'));
+        return view('frontend.Homapage', compact('banners', 'foods'));
     }
 }

@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {
+
+
+    protected $casts = [
+        'featured' => 'boolean',
+    ];
+
     function showFood()
     {
         $food = Food::with('categories:title')->latest()->get();
