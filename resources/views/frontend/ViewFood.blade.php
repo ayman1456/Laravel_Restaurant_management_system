@@ -88,10 +88,10 @@
         <div class="reviewsCards">
             <div class="row">
                 <div
-                    class="col-lg-{{ auth('customer')->check() && !auth('customer')->user()->givenReview($food->id) ? '8' : '12' }} text-white">
+                    class="col-lg-{{ auth('customer')->check() && !auth('customer')?->user()->givenReview($food->id) ? '8' : '12' }} text-white">
                     <div class="row">
                         @foreach ($food->reviews as $review)
-                        <div class="col-lg-{{ !auth('customer')->user()->givenReview($food->id) ? '6' : '4' }}">
+                        <div class="col-lg-{{ !auth('customer')?->user()?->givenReview($food->id) ? '6' : '4' }}">
                             <div class="card bg-dark text-white my-3 p-3">
                                 <div class="row">
                                     <div class="col-2">
