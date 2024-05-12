@@ -16,7 +16,7 @@
         style="background-color: black; box-shadow: 5px 5px 5px 5px rgba(43, 43, 43, 0.6)">
 
         <div class="card-body">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-lg-3">
                     <a href="{{ route('menu.show.food', $food->id) }}"><img src="{{ asset('storage/'. $food->image) }}"
                             style="width: 100%; border-radius:7px"></a>

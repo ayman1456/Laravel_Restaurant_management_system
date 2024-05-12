@@ -1,0 +1,8 @@
+#banners{
+    color: white !important;
+}
+
+
+#banners .bannerSlide{
+    height: 500px;
+}
