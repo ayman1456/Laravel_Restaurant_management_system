@@ -189,8 +189,7 @@
            Dawat multi-cuisine Restaurant
           </h6>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+            A place where you step into a realm of culinary wonders, where every dish tells a story, every flavor ignites a sensation, and every meal becomes an unforgettable journey through the artistry of taste.
           </p>
         </div>
         <!-- Grid column -->
