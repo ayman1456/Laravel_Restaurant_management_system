@@ -84,7 +84,7 @@
           </div>
             
           <div class="form-check form-switch toggle-switch mb-30">
-            <input value="{{ $editedFood->featured ?? true }}" class="form-check-input" name="featured" type="checkbox" id="featured">
+            <input  class="form-check-input" name="featured" type="checkbox" id="featured">
             <label class="form-check-label" for="featured">Add to Home</label>
           </div>
 
