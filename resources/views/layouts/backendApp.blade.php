@@ -33,8 +33,8 @@
   <!-- ======== sidebar-nav start =========== -->
   <aside class="sidebar-nav-wrapper">
     <div class="navbar-logo">
-      <a href="index.html">
-        <img src="{{ asset('storage/logo/dawat.png') }}" style="width: 100%" alt="logo" />
+      <a href="index.html" class="block text-center">
+        <img src="https://dawatfoodresort.com/reewheev/2021/06/cropped-dawat-logo.png" style="width: 50%;filter: invert(100%)" alt="logo" />
       </a>
     </div>
     <nav class="sidebar-nav">
