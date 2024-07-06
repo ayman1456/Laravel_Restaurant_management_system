@@ -28,11 +28,21 @@ class ProfileController extends Controller
             $fileName = $request->profile->store('users', 'public');
         }
         // dd($request->all());
-        Customer::where('id', auth('customer')->id())->update([
-            'name' => $request->name,
-            'address' => $request->address ?? auth('customer')->user()->address,
-            'profile_url' => $fileName ?? auth('customer')->user()->profile_img,
-        ]);
+        $user = Customer::where('id', auth('customer')->id())->first();
+        $user->name = $request->name;
+        $user->address = $request->address ?? auth('customer')->user()->address;
+        $user->profile_url = $fileName ?? auth('customer')->user()->profile_img;
+        $user->save();
+
+
+        // dd($user);
+        if ($request->type) {
+            if ($request->type == 'delivery') {
+                $user->syncRoles([$request->type]);
+            } else {
+                $user->removeRole('delivery');
+            }
+        }
 
 
         return back();
@@ -50,5 +60,23 @@ class ProfileController extends Controller
         $orders = $query->with('table')->where('customer_id', auth('customer')->id())->get();
 
         return view('frontend.Order', compact('orders'));
+    }
+
+    function deliveries(Request $request)
+    {
+        $query = Order::query();
+        if ($request->from) {
+            $query->where('created_at', '>=', $request->from);
+        }
+        if ($request->to) {
+            $query->where('created_at', '<=', $request->to);
+        }
+        $orders = $query->with('table')->where('status', 'Processing')->get();
+
+        return view('frontend.myDeliveries', compact('orders'));
+    }
+
+    function setDelivery($id) {
+        
     }
 }

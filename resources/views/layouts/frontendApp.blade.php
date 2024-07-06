@@ -121,6 +121,14 @@
               <a class="nav-link {{ request()->routeIs('user.orders') ? 'active' : null }}"
                 href="{{ route('user.orders') }}" style="color: #999"><i class="fa-solid fa-utensils"></i> My Orders</a>
             </li>
+            @role('delivery', 'customer')
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('user.delivery') ? 'active' : null }}"
+                href="{{ route('user.delivery') }}" style="color: #999"><i class="fa-solid fa-box"></i>
+                My Deliveries</a>
+            </li>
+            @endrole
+
             <li class="nav-item">
               <a class="nav-link {{ request()->routeIs('user.settings') ? 'active' : null }}"
                 href="{{ route('user.settings') }}" style="color: #999"><i class="fa-solid fa-gears"></i> Profile
