@@ -24,7 +24,7 @@
                         style="background-color:black; border:1px solid #6A6A6A; width:400px; border-radius:10px;padding:5px;color:white">
                 </div>
                 <button class="my-2"
-                    style="background-color: #f7ad1d;color:black;padding:5px 20px 5px 20px; border:0px;border-radius:10px">Login</button>
+                    style="background-color: #f7ad1d;color:black;padding:11px 20px 11px 20px; border:0px;border-radius:10px">Login</button>
             </form>
         </div>
     </div>

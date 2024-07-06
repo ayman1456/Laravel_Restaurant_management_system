@@ -22,9 +22,9 @@ class ProfileController extends Controller
     function updateprofile(Request $request)
     {
         $fileName = null;
-       
+
         if ($request->hasFile('profile')) {
-           
+
             $fileName = $request->profile->store('users', 'public');
         }
         // dd($request->all());
@@ -38,9 +38,16 @@ class ProfileController extends Controller
         return back();
     }
 
-    function orders()
+    function orders(Request $request)
     {
-        $orders = Order::with('table')->where('customer_id', auth('customer')->id())->get();
+        $query = Order::query();
+        if ($request->from) {
+            $query->where('created_at', '>=', $request->from);
+        }
+        if ($request->to) {
+            $query->where('created_at', '<=', $request->to);
+        }
+        $orders = $query->with('table')->where('customer_id', auth('customer')->id())->get();
 
         return view('frontend.Order', compact('orders'));
     }

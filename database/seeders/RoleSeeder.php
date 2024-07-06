@@ -16,11 +16,12 @@ class RoleSeeder extends Seeder
         $roles = [
             'admin',
             'pos-manager',
-            
+
         ];
 
         foreach ($roles as $role) {
             Role::create(['name' => $role]);
         }
+        Role::create(['name' => 'delivery','guard_name'=> 'customer']);
     }
 }

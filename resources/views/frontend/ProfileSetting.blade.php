@@ -15,6 +15,17 @@
                     </div>
 
 
+                    <div class="mx-auto text-light" style="width: fit-content">
+                        <label for="delivery" class="mx-2">
+                            <input type="radio" name="type" id="delivery"> Delivery Man
+                        </label>
+                        <label for="customer">
+                            <input type="radio" name="type" id="customer"> Customer
+                        </label>
+                       
+                    </div>
+
+
                     <div class="mx-auto " style="width:fit-content" >
                         
                         <div class="my-2">
