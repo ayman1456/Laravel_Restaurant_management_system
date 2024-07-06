@@ -61,8 +61,8 @@
                         <td>
                             <b>{{ $order->total_price }} tk</b>
                             <br>
-                            <a href="{{ route('user.delivery.set',$order->id) }}" class="btn btn-primary mt-2">Take
-                                Delivery</a>
+                            <a href="{{ route('user.delivery.set',$order->id) }}" class="btn btn-primary mt-2">{{ $order->status == "Delivering" ? "Delivering" : 'Take
+                            Delivery' }}</a>
                         </td>
                     </tr>
                     @endforeach

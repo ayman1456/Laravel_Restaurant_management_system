@@ -71,12 +71,23 @@ class ProfileController extends Controller
         if ($request->to) {
             $query->where('created_at', '<=', $request->to);
         }
-        $orders = $query->with('table')->where('status', 'Processing')->get();
+        $orders = $query->with('table')->whereIn('status', ['Processing', 'Delivering'])->get();
 
         return view('frontend.myDeliveries', compact('orders'));
     }
 
-    function setDelivery($id) {
-        
+    function setDelivery($id)
+    {
+        $order = Order::find($id)->update([
+            'status' => 'Delivering',
+        ]);
+        return back();
+    }
+
+    function markOrder($id) {
+        $order = Order::find($id)->update([
+            'status' => 'Complete',
+        ]);
+        return back();
     }
 }
