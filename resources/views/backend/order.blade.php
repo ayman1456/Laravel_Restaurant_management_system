@@ -1,7 +1,29 @@
 @extends('layouts.backendApp')
 @section('content')
 <div class="container">
-    <div class="card mt-5">
+    <div class="card text-white p-3">
+        <form action="" method="GET">
+
+            <div class="row align-items-end">
+                <div class="col-lg-4">
+                    <label for="from" class="d-block">
+                        <h4>From </h4>
+                        <input name="from" type="date" class="form-control">
+                    </label>
+                </div>
+                <div class="col-lg-4">
+                    <label for="from" class="d-block">
+                        <h4>To </h4>
+                        <input type="date" name="to" class="form-control">
+                    </label>
+                </div>
+                <div class="col-lg-4">
+                    <button class="btn btn-primary w-100">Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card mt-2">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">

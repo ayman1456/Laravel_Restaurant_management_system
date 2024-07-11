@@ -85,10 +85,20 @@ class PosController extends Controller
         return back();
     }
 
-    function viewOrders()
+    function viewOrders(Request $request)
     {
-        $orders = Order::with('table')->get();
-        // dd($orders);
+        // $orders = Order::with('table')->get();
+
+        $query = Order::query();
+        if ($request->from) {
+            $query->where('created_at', '>=', $request->from);
+        }
+        if ($request->to) {
+            $query->where('created_at', '<=', $request->to);
+        }
+        $orders = $query->with('table')->where('status', 'Processing')->get();
+
+        
         return view('backend.order', compact('orders'));
     }
 }
