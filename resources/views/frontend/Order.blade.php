@@ -63,6 +63,10 @@
                         <td>{{ $order->phone }}</td>
                         <td>    
                           <b>{{ $order->total_price }} tk</b>
+                          <br>
+                          @if ($order->status == 'Delivering')
+                              <a href="{{ route('user.order.mark', $order->id) }}" class="btn btn-primary mt-2">Mark as Received</a>
+                          @endif
                         </td>
                     </tr>
                     @endforeach

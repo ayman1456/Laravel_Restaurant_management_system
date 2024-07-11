@@ -86,6 +86,7 @@ Route::middleware('isCustomer')->group(function () {
     Route::POST('/my-profile/settings', [ProfileController::class, 'updateprofile'])->name('user.profile.update');
     Route::get('/my-profile/my-deliveries', [ProfileController::class, 'deliveries'])->name('user.delivery');
     Route::get('/my-profile/take-deliveries/{id}', [ProfileController::class, 'setDelivery'])->name('user.delivery.set');
+    Route::get('/my-profile/mark-order/{id}', [ProfileController::class, 'markOrder'])->name('user.order.mark');
 
     //* CART routes
 
