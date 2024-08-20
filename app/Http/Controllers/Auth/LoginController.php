@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -44,6 +46,34 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // $this->middleware('guest')->except('logout');
+    }
+
+
+    function employeeApprovalList()
+    {
+        // $approvalLists = Customer::with('roles')->get();
+        $approvalLists = Customer::whereHas('roles', function ($query) {
+            $query->where('status', false);
+        })->with('roles')->get();
+
+
+        return view('backend.EmployeeApproval', compact('approvalLists'));
+    }
+
+    function employeeApproval($status, $id)
+    {
+
+        if ($status == 1) {
+            DB::table('model_has_roles')
+                ->where('model_type', 'App\Models\Customer')
+                ->where('model_id', $id)
+                ->update(['status' => true]);
+        } else {
+            DB::table('model_has_roles')
+                ->where('model_type', 'App\Models\Customer')
+                ->where('model_id', $id)
+                ->delete();
+        }
     }
 }

@@ -34,7 +34,8 @@
   <aside class="sidebar-nav-wrapper">
     <div class="navbar-logo">
       <a href="index.html" class="block text-center">
-        <img src="https://dawatfoodresort.com/reewheev/2021/06/cropped-dawat-logo.png" style="width: 50%;filter: invert(100%)" alt="logo" />
+        <img src="https://dawatfoodresort.com/reewheev/2021/06/cropped-dawat-logo.png"
+          style="width: 50%;filter: invert(100%)" alt="logo" />
       </a>
     </div>
     <nav class="sidebar-nav">
@@ -70,14 +71,23 @@
           </a>
 
         </li>
-        <li class="nav-item {{ request()->routeIs('register') ? 'active' : null }}">
-          <a href="{{ route('register') }}">
 
+        <li class="nav-item nav-item-has-children {{ request()->routeIs('register') ? 'active' : null }}">
+          <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_2" aria-controls="ddmenu_2"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="me-2"> <i class="lni lni-users"></i></span>
 
             <span class="text">Employee Management</span>
           </a>
+          <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
+            <li>
+              <a href="{{ route('register') }}"> Add Employee </a>
+            </li>
+            <li>
+              <a href="{{ route('employee.approval.list') }}"> Pending Employee </a>
+            </li>
 
+          </ul>
         </li>
 
         <li class="nav-item {{ request()->routeIs('table') ? 'active' : null }}">
@@ -185,8 +195,8 @@
                     </div>
                   </li>
                   <li class="divider"></li>
-                  
-                  
+
+
                   <li class="divider"></li>
                   <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();

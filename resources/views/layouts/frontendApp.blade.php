@@ -121,6 +121,7 @@
               <a class="nav-link {{ request()->routeIs('user.orders') ? 'active' : null }}"
                 href="{{ route('user.orders') }}" style="color: #999"><i class="fa-solid fa-utensils"></i> My Orders</a>
             </li>
+            @if (auth('customer')->user()->roles->where('status',true)->first()?->name != null)
             @role('delivery', 'customer')
             <li class="nav-item">
               <a class="nav-link {{ request()->routeIs('user.delivery') ? 'active' : null }}"
@@ -128,6 +129,7 @@
                 My Deliveries</a>
             </li>
             @endrole
+            @endif
 
             <li class="nav-item">
               <a class="nav-link {{ request()->routeIs('user.settings') ? 'active' : null }}"

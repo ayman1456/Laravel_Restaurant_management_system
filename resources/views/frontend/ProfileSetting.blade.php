@@ -14,17 +14,23 @@
             <input type="file" class="d-none" id="profile" name="profile">
         </div>
 
+        
 
         <div class="mx-auto text-light" style="width: fit-content">
             <label for="delivery" class="mx-2">
-                <input {{ auth('customer')->user()->roles()->first()?->name == 'delivery' ? 'checked' : '' }}
+                <input {{ auth('customer')->user()->roles->where('status',true)->first()?->name == 'delivery' ? 'checked' : '' }}
                 value="delivery" type="radio" name="type" id="delivery"> Delivery Man
             </label>
             <label for="customer">
-                <input type="radio" {{ auth('customer')->user()->roles()->first()?->name != 'delivery' ? 'checked' : ''
+                <input type="radio" {{ auth('customer')->user()->roles->where('status',true)->first()?->name != 'delivery' ? 'checked' : ''
                 }} value="customer" name="type" id="customer"> Customer
             </label>
 
+        </div>
+        <div class="text-center text-danger">
+            @session('msg')
+            {{ session('msg') }}
+            @endsession
         </div>
 
 

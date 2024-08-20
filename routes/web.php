@@ -7,13 +7,14 @@ use App\Http\Controllers\FoodController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\CheckoutController;
+
 use App\Http\Controllers\SslCommerzPaymentController;
-use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
 
 Auth::routes();
@@ -22,6 +23,10 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard')->middleware('role:admin');
 
+    //* employee approval
+
+    Route::get('/employee/approval-list', [LoginController::class, 'employeeApprovalList'])->name('employee.approval.list');
+    Route::get('/employee/approval/{status}/{id}', [LoginController::class, 'employeeApproval'])->name('employee.approval');
     // Category Routes
     Route::middleware('role:admin')->group(function () {
         Route::get('/category', [CategoryController::class, 'showCategory'])->name('category.show');

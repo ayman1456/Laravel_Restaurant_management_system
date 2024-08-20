@@ -7,6 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -16,6 +17,7 @@ class ProfileController extends Controller
     }
     function settings()
     {
+        // dd(auth('customer')->user()->roles->where('status',true)->first()?->name);
         return view('frontend.ProfileSetting');
     }
 
@@ -35,8 +37,14 @@ class ProfileController extends Controller
         $user->save();
 
 
-        // dd($user);
+
         if ($request->type) {
+
+            if (auth('customer')->user()->roles->where('status', false)->first()?->name) {
+                Session::flash('msg', 'Please wait for approval!');
+            }
+
+
             if ($request->type == 'delivery') {
                 $user->syncRoles([$request->type]);
             } else {
@@ -84,7 +92,8 @@ class ProfileController extends Controller
         return back();
     }
 
-    function markOrder($id) {
+    function markOrder($id)
+    {
         $order = Order::find($id)->update([
             'status' => 'Complete',
         ]);
